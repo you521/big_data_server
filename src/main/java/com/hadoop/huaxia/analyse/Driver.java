@@ -17,7 +17,7 @@ import java.util.LinkedList;
 public class Driver {
 
     //subTimeLength 的取值以后再定，要定到凌晨2-4点活动少的时候
-    public static int subTimeLength = 8;
+    public static int subTimeLength = 9;
 
     @SuppressWarnings({ "rawtypes" , "unchecked" })
     public static HashMap<String, LinkedList> runTimeMap = new HashMap();
