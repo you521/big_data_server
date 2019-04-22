@@ -1,0 +1,242 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.hadoop.huaxia</groupId>
+  <artifactId>bigdata-server</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>bigdata-server Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  <!-- 定义一些属性常量 使用方式如下：${mysql.version} -->
+  <properties>
+    <!-- 设置源代码的编码 编码方式为utf-8-->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>  
+    <!-- 设置jdk版本号 -->
+    <java.version>1.8</java.version> 
+    <junit.version>4.12</junit.version>
+    <!-- log4j日志文件管理包版本 -->
+    <slf4j.version>1.7.25</slf4j.version>
+    <log4j.version>1.2.17</log4j.version>
+     <!-- 阿里的 fastjson-->
+    <fastjson.version>1.2.47</fastjson.version>
+    <!-- quartz定时器 -->
+    <quartz.version>2.3.0</quartz.version>
+    <!-- Jackson版本号 -->
+    <jackson.version>2.5.4</jackson.version>
+    <!-- hadoop版本号 -->
+    <hadoop.version>3.1.0</hadoop.version>
+    <!-- spark版本号 -->
+    <spark.version>2.4.1</spark.version>
+    <!-- scala 版本号 -->
+    <scala.version>2.12</scala.version>
+  </properties>
+
+  <dependencies>
+    <!-- 导入WEB有关的开发包 -->
+    <!-- 添加servlet3.0核心包 -->
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>2.0</version>
+    </dependency>
+    
+    <!-- 引入jstl依赖 --> 
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+    </dependency>
+    
+    <!-- 引入junit -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <!--表示开发的时候引入，发布的时候不会加载此包-->
+        <scope>test</scope>
+    </dependency>
+    
+    <!-- 日志文件管理包 --> 
+    <!-- log start -->
+    <dependency>  
+         <groupId>log4j</groupId>  
+         <artifactId>log4j</artifactId>  
+         <version>${log4j.version}</version>    
+     </dependency> 
+     <dependency>  
+         <groupId>org.slf4j</groupId>  
+         <artifactId>slf4j-api</artifactId>  
+         <version>${slf4j.version}</version>  
+      </dependency>  
+      <dependency>  
+         <groupId>org.slf4j</groupId>  
+         <artifactId>slf4j-log4j12</artifactId>  
+         <version>${slf4j.version}</version> 
+    </dependency>
+    <!-- log end -->
+    
+    <!-- 阿里的json工具类 -->
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+    </dependency>
+    
+    <!-- quartz 定时器依赖包 -->
+    <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>${quartz.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz-jobs</artifactId>
+        <version>${quartz.version}</version>
+    </dependency>
+    
+    <!-- maven打包依赖 -->
+    <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+    
+    <dependency>  
+        <groupId>jdk.tools</groupId>  
+        <artifactId>jdk.tools</artifactId>  
+        <version>1.8</version>  
+        <scope>system</scope>  
+        <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>  
+    </dependency>
+    
+    <!-- hadoop依赖包 -->
+    <!-- start -->
+	<dependency>
+	    <groupId>org.apache.hadoop</groupId>
+	    <artifactId>hadoop-common</artifactId>
+	    <version>${hadoop.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.hadoop</groupId>
+	    <artifactId>hadoop-annotations</artifactId>
+	    <version>${hadoop.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.hadoop</groupId>
+	    <artifactId>hadoop-auth</artifactId>
+	    <version>${hadoop.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.hadoop</groupId>
+	    <artifactId>hadoop-client</artifactId>
+	    <version>${hadoop.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.hadoop</groupId>
+	    <artifactId>hadoop-hdfs</artifactId>
+	    <version>${hadoop.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.hadoop</groupId>
+	    <artifactId>hadoop-mapreduce-client-core</artifactId>
+	    <version>${hadoop.version}</version>
+	</dependency>
+	<!-- end -->
+	
+    <!-- spark 依赖 -->
+    <!-- start -->
+	<dependency>
+	    <groupId>org.apache.spark</groupId>
+	    <artifactId>spark-core_${scala.version}</artifactId>
+	    <version>${spark.version}</version>
+	    <exclusions> 
+	     <exclusion> 
+	      <groupId>io.netty</groupId> 
+	      <artifactId>netty</artifactId> 
+	     </exclusion> 
+	    </exclusions>
+	</dependency>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-sql_${scala.version}</artifactId>
+        <version>${spark.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-hive_${scala.version}</artifactId>
+        <version>${spark.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming_${scala.version}</artifactId>
+        <version>${spark.version}</version>
+    </dependency>
+	<dependency>
+	    <groupId>org.apache.spark</groupId>
+	    <artifactId>spark-streaming-flume_${scala.version}</artifactId>
+	    <version>${spark.version}</version>
+	</dependency>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId>
+        <version>${spark.version}</version>
+    </dependency>
+    <!-- end -->
+    
+    <!-- 解决spark jackson 依赖的版本过高 不兼容问题 -->
+    <dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.6.6</version>
+    </dependency>
+    
+    <!-- 解决io.jettyjar包冲突问题 -->
+    <dependency> 
+        <groupId>io.netty</groupId>
+        <artifactId>netty-all</artifactId>
+        <version>4.1.18.Final</version> 
+    </dependency> 
+  </dependencies>
+  <build>
+    <finalName>bigdata-server</finalName>
+    <plugins>
+            <!-- 通过 pom.xml 设置 Maven 通过 JDK 1.8 进行java源代码的编译  -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <!-- 指定source和target的版本 -->  
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- 我运行这个jar所运行的主类 -->
+                            <mainClass>code.demo.spark.JavaWordCount</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>
+                            <!-- 必须是这样写 -->
+                            jar-with-dependencies
+                        </descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+    </plugins>
+  </build>
+</project>
