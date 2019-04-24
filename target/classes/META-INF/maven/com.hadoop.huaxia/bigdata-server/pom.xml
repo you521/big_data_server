@@ -207,7 +207,7 @@
   </dependencies>
   <build>
     <finalName>bigdata-server</finalName>
-    <plugins>
+     <plugins>
             <!-- 通过 pom.xml 设置 Maven 通过 JDK 1.8 进行java源代码的编译  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

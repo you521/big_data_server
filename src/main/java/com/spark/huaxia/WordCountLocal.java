@@ -53,9 +53,8 @@ public class WordCountLocal implements Serializable
                return Arrays.asList(line.split(" ")).iterator(); 
               } 
           });
-        
         // 5 将每一个单词，映射为(单词, 1)的这种格式，为之后进行reduce操作做准备 
-        // mapToPair，就是将每个元素映射为一个(v1,v2)这样的Tuple2（scala里的Tuple类型）类型的元素 
+        // mapToPair，就是将每个元素映射为一个(v1,v2)这样的Tuple2类型的元素 
         // mapToPair得与PairFunction函数配合使用，PairFunction中的第一个泛型参数代表输入类型 
         // 第二个和第三个泛型参数，代表的输出的Tuple2元素的第一个值和第二个值的类型
         // JavaPairRDD的两个泛型参数，分别代表了tuple元素的第一个值和第二个值的类型 
@@ -63,6 +62,7 @@ public class WordCountLocal implements Serializable
            private static final long serialVersionUID = 1L; 
            @Override 
            public Tuple2<String, Integer> call(String word) throws Exception {
+               System.out.println("====================word==============="+word);
                return new Tuple2<>(word, 1);                    
              }
            });
